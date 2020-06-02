@@ -1,0 +1,33 @@
+{
+  "name": "Scan-here-backen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mar0903/Scan-here-backen.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mar0903/Scan-here-backen/issues"
+  },
+  "homepage": "https://github.com/Mar0903/Scan-here-backen#readme",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.26.0",
+    "mongoose": "^5.9.16"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4",
+    "standard": "^14.3.4"
+  }
+}
