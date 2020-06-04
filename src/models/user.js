@@ -1,5 +1,6 @@
 
 const mongoose = require('mongoose')
+
 const userSchema = mongoose.Schema({
   email: {
     type: String,
@@ -39,7 +40,7 @@ const userSchema = mongoose.Schema({
   },
   roll: {
     type: String,
-    enum: ['user', 'admin']
+    enum: ['user', 'admin'],
     required: true
   }
 
