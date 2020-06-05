@@ -1,6 +1,5 @@
 
 const mongoose = require('mongoose')
-
 const userSchema = mongoose.Schema({
   email: {
     type: String,
@@ -19,11 +18,12 @@ const userSchema = mongoose.Schema({
   },
   registerDate: {
     type: Date,
-    required: true
+    default: Date.now()
   },
   age: {
     type: Number,
-    required: true
+    required: true,
+    min: 18
   },
   gender: {
     type: String,
@@ -34,13 +34,12 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  rewards: {
-    type: String,
-    required: true
+  rewards: { // vendria el id de las promociones
+    type: Object
   },
   roll: {
     type: String,
-    enum: ['user', 'admin'],
+    enum: ['user', 'admin', 'comercio'],
     required: true
   }
 

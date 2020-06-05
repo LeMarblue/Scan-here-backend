@@ -1,25 +1,25 @@
-const escaneo = require('../models/escaneos')
+const product = require('../models/products')
 
 
 
 async function getAll () {
-    const allScans = await escaneo.find()
+    const allScans = await product.find()
     return allScans
 
 }
 
 async function create (scanData) {
-   const scanDone = await escaneo.create(scanData)
+   const scanDone = await product.create(scanData)
    return scanDone
 }
 
 
 function deleteById (id) {
-    return escaneo.findByIdAndRemove(id)
+    return product.findByIdAndRemove(id)
   }
   
   function updateById (id, scanData) {
-    return escaneo.findByIdAndUpdate(id, scanData)
+    return product.findByIdAndUpdate(id, scanData)
   }
   
 module.exports = {

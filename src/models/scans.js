@@ -3,25 +3,25 @@ const mongoose = require('mongoose')
 const ScansSchema = new mongoose.Schema({
   scanedBy: {
     type: mongoose.Schema.Types.ObjectId, 
-    ref: 'User'
+    ref: 'product'
   },
   scanDate: {
-    type: String,
-    minlength:2,
-    maxlength: 20,
-    required: true
+    type: Date,
+    default: Date.now()
   },
-  scanTime: {
+  qr: {
     type: String,
-    minlength:2,
+    minlength:6,
     maxlength: 500,
     required: true
   },
   product: {
     type: mongoose.Schema.Types.ObjectId, 
-    ref: 'Product'
+    ref: 'product'
     }
 })
 
 
 module.exports = mongoose.model('Scan', ScansSchema)
+
+

@@ -1,17 +1,12 @@
 const mongoose = require('mongoose')
 
-const ProductsSchema = new mongoose.Schema({
+const productsSchema = new mongoose.Schema({
   sku: {
     type: String,
     minlength:6,
     maxlength: 20,
-    required: true
-  },
-  qr: {
-    type: String,
-    minlength:6,
-    maxlength: 500,
-    required: true
+    required: true,
+    index: true
   },
   productName:{
     type: String,
@@ -27,4 +22,4 @@ const ProductsSchema = new mongoose.Schema({
   }
 })
 
-module.exports = mongoose.model('Product', ProductsSchema)
+module.exports = mongoose.model('product', productsSchema)

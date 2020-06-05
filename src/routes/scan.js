@@ -1,23 +1,14 @@
 const express = require('express')
 
-const escaneo = require('../usecases/escaneo')
-
-//const auth = require('../middlewares/auth')
+const product = require('../usecases/scans')
 
 const router = express.Router()
-
-
-// router.use((request, response, next)=>{
-//   console.log(`midleware router /post`)
-//   next()
-// })
-
 
 
 router.get('/', async (request, response) => {
     
     try {
-        const allscans = await escaneo.getAll()
+        const allscans = await product.getAll()
         response.json({
           success: true,
           message: 'all scans',
@@ -37,7 +28,7 @@ router.get('/', async (request, response) => {
 
 router.post('/' ,async (request, response) => {
     try {
-      const newScan = await escaneo.create(request.body)
+      const newScan = await product.create(request.body)
       response.json({
         success: true,
         message: 'Scan registered',
@@ -46,15 +37,10 @@ router.post('/' ,async (request, response) => {
         }
       })
     } catch (error) {
-      /*const errorsArray = Object.entries(error.errors)
-        .map(([key, value]) => {
-          return { [key]: value.message }
-        })
-        */
+
       response.json({
         success: false,
         error: error.message,
-        //errors: errorsArray
       })
     }
 })
@@ -62,12 +48,12 @@ router.post('/' ,async (request, response) => {
 router.delete('/:id', async (request, response) => {
   try {
     const { id } = request.params
-    const postDeleted = await Posts.deleteById(id)
+    const scanDeleted = await scans.deleteById(id)
     response.json({
       success: true,
-      message: `post with ${id} deleted`,
+      message: `scan with ${id} deleted`,
       data: {
-        koder: postDeleted
+        koder: scanDeleted
       }
     })
   } catch (error) {
@@ -82,12 +68,12 @@ router.delete('/:id', async (request, response) => {
 router.patch('/:id' , async (request, response) => {
   try {
     const { id } = request.params
-    const postUdated = await Posts.updateById(id, request.body)
+    const scanUdated = await scans.updateById(id, request.body)
     response.json({
       success: true,
-      message: `post with ${id} updated`,
+      message: `scan with ${id} updated`,
       data: {
-        postUdated
+        scanUdated
       }
     })
   } catch (error) {
