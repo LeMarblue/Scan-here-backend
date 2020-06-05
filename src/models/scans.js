@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const ScansSchema = new mongoose.Schema({
   scanedBy: {
     type: mongoose.Schema.Types.ObjectId, 
-    ref: 'product'
+    ref: 'user'
   },
   scanDate: {
     type: Date,
@@ -17,7 +17,7 @@ const ScansSchema = new mongoose.Schema({
   },
   product: {
     type: mongoose.Schema.Types.ObjectId, 
-    ref: 'product'
+    ref: 'Product'
     }
 })
 

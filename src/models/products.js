@@ -17,9 +17,10 @@ const productsSchema = new mongoose.Schema({
   price:{
     type: Number,
   },
-  moneda:{
-    type: String
+  currency:{
+    type: String,
+    enum: ['mxn', 'usd', 'eur']
   }
 })
 
-module.exports = mongoose.model('product', productsSchema)
+module.exports = mongoose.model('Product', productsSchema)

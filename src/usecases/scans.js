@@ -3,7 +3,7 @@ const scan = require('../models/scans')
 
 
 async function getAll () {
-    const allScans = await scan.find().populate('scanedBy').exec()
+    const allScans = await scan.find().populate('scanedBy').populate('product').exec()
     return allScans
 
 }

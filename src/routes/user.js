@@ -82,7 +82,7 @@ router.delete('/:id', async (request, response) => {
 
 router.post('/signup', async (request, response) => {
   try {
-    const newUser = await user.signup(request.body)
+    const newUser = await user.signUp(request.body)
     response.json({
       success: true,
       message: 'User registered',

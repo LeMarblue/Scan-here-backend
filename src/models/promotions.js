@@ -1,31 +1,31 @@
 const mongoose = require('mongoose')
 
-const productSchema = new mongoose.Schema({
-  product: [{
+const promotionSchema = new mongoose.Schema({
+  productInfo: [{
     type: mongoose.Schema.Types.ObjectId, 
-    ref: 'producto'
+    ref: 'Product'
   }],
-  numeroproducts: {
+  numberOfScans: {
     type: Number,
     required: true
   },
-  fechaInicio:{
+  promoStarts:{
     type: Date,
     required: true
   },
-  fechaFinal:{
+  promoEnds:{
     type: Date,
     required: true
   },
-  estado:{
+  state:{
     type: String,
     enum: ['inactivo', 'activo'],
     required: true
   },
-  premio:{
+  prize:{
     type: String,
     required: true
   }
 })
 
-module.exports = mongoose.model('product', productSchema)
+module.exports = mongoose.model('Promotion', promotionSchema)
