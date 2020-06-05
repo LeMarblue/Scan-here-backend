@@ -1,16 +1,15 @@
-
 const express = require('express')
-const user = require('../usecases/user')
+const promotion = require('../usecases/promotions')
 
 const router = express.Router()
 
 router.get('/', async (request, response) => {
   try {
-    const allUsers = await user.getAll()
+    const allpromotions = await promotion.getAll()
     response.json({
-      message: 'All users',
+      message: 'All promotions',
       data: {
-        user: allUsers
+        promotion: allpromotions
       }
     })
   } catch (error) {
@@ -24,12 +23,12 @@ router.get('/', async (request, response) => {
 
 router.post('/', async (request, response) => {
   try {
-    const newUser = await user.create(request.body)
+    const newpromotion = await promotion.create(request.body)
     response.json({
       success: true,
-      message: 'New user created',
+      message: 'New promotion created',
       data: {
-        user: newUser
+        promotion: newpromotion
       }
     })
   } catch (error) {
@@ -43,12 +42,12 @@ router.post('/', async (request, response) => {
 router.patch('/:id', async (request, response) => {
   try {
     const { id } = request.params
-    const userUpdate = await user.updateById(id, request.body)
+    const promotionUpdate = await promotion.updateById(id, request.body)
     response.json({
       success: true,
-      message: `User with id ${id} updated`,
+      message: `promotion with id ${id} updated`,
       data: {
-        user: userUpdate
+        promotion: promotionUpdate
       }
     })
   } catch (error) {
@@ -59,16 +58,17 @@ router.patch('/:id', async (request, response) => {
     })
   }
 })
+
 
 router.delete('/:id', async (request, response) => {
   try {
     const { id } = request.params
-    const UserDeleted = await user.deleteById(id)
+    const promotionDeleted = await promotion.deleteById(id)
     response.json({
       success: true,
-      message: `User with id ${id} deleted`,
+      message: `promotion with id ${id} deleted`,
       data: {
-        User: UserDeleted
+        promotion: promotionDeleted
       }
     })
   } catch (error) {
@@ -80,23 +80,6 @@ router.delete('/:id', async (request, response) => {
   }
 })
 
-router.post('/signup', async (request, response) => {
-  try {
-    const newUser = await user.signUp(request.body)
-    response.json({
-      success: true,
-      message: 'User registered',
-      data: {
-        user: newUser
-      }
-    })
-  } catch (error) {
-    response.status(400)
-    response.json({
-      success: false,
-      error: error.message
-    })
-  }
-})
+
 
 module.exports = router

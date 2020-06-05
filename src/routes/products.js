@@ -1,16 +1,15 @@
-
 const express = require('express')
-const user = require('../usecases/user')
+const product = require('../usecases/products')
 
 const router = express.Router()
 
 router.get('/', async (request, response) => {
   try {
-    const allUsers = await user.getAll()
+    const allproducts = await product.getAll()
     response.json({
-      message: 'All users',
+      message: 'All products',
       data: {
-        user: allUsers
+        product: allproducts
       }
     })
   } catch (error) {
@@ -24,12 +23,12 @@ router.get('/', async (request, response) => {
 
 router.post('/', async (request, response) => {
   try {
-    const newUser = await user.create(request.body)
+    const newproduct = await product.create(request.body)
     response.json({
       success: true,
-      message: 'New user created',
+      message: 'New product created',
       data: {
-        user: newUser
+        product: newproduct
       }
     })
   } catch (error) {
@@ -43,12 +42,12 @@ router.post('/', async (request, response) => {
 router.patch('/:id', async (request, response) => {
   try {
     const { id } = request.params
-    const userUpdate = await user.updateById(id, request.body)
+    const productUpdate = await product.updateById(id, request.body)
     response.json({
       success: true,
-      message: `User with id ${id} updated`,
+      message: `product with id ${id} updated`,
       data: {
-        user: userUpdate
+        product: productUpdate
       }
     })
   } catch (error) {
@@ -59,16 +58,17 @@ router.patch('/:id', async (request, response) => {
     })
   }
 })
+
 
 router.delete('/:id', async (request, response) => {
   try {
     const { id } = request.params
-    const UserDeleted = await user.deleteById(id)
+    const productDeleted = await product.deleteById(id)
     response.json({
       success: true,
-      message: `User with id ${id} deleted`,
+      message: `product with id ${id} deleted`,
       data: {
-        User: UserDeleted
+        product: productDeleted
       }
     })
   } catch (error) {
@@ -80,23 +80,6 @@ router.delete('/:id', async (request, response) => {
   }
 })
 
-router.post('/signup', async (request, response) => {
-  try {
-    const newUser = await user.signUp(request.body)
-    response.json({
-      success: true,
-      message: 'User registered',
-      data: {
-        user: newUser
-      }
-    })
-  } catch (error) {
-    response.status(400)
-    response.json({
-      success: false,
-      error: error.message
-    })
-  }
-})
+
 
 module.exports = router
