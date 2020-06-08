@@ -3,21 +3,21 @@ const mongoose = require('mongoose')
 const productsSchema = new mongoose.Schema({
   sku: {
     type: String,
-    minlength:6,
+    minlength: 6,
     maxlength: 20,
     required: true,
     index: true
   },
-  productName:{
+  productName: {
     type: String,
-    minlength:2,
+    minlength: 2,
     maxlength: 500,
     required: true
   },
-  price:{
-    type: Number,
+  price: {
+    type: Number
   },
-  currency:{
+  currency: {
     type: String,
     enum: ['mxn', 'usd', 'eur']
   }

@@ -4,26 +4,28 @@ const query = require('../usecases/querys')
 
 const router = express.Router()
 
-
 router.get('/', async (request, response) => {
-    
-    try {
-        const allscans = await query.scansBetwen()
-        response.json({
-          success: true,
-          message: 'all scans',
-          data: {
-            scans: allscans
-          }
-        })
-    } catch (error) {
-        response.json({
-            success: false,
-            error: error.message,
-          })
-        
+  try {
+    const { startDate, endDate, date } = request.query
+    let allScans
+    if (startDate && endDate) {
+      allScans = await query.scansBetwenTwoDates(startDate, endDate)
+    } else if (date) {
+      allScans = await query.scansByDate(date)
     }
+    response.json({
+      success: true,
+      message: 'all scans',
+      data: {
+        scans: allScans
+      }
+    })
+  } catch (error) {
+    response.json({
+      success: false,
+      error: error.message
+    })
+  }
 })
-
 
 module.exports = router
