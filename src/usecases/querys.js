@@ -1,19 +1,28 @@
 const scan = require('../models/scans')
 
-
-
-async function scansBetwen () {
-    const allScans = await scan.find(
-      { 
-      scanDate: { $gte: '2020-06-06', $lte: '2020-06-09' 
-      } 
+async function scansByDate (date) {
+  const allScans = await scan.find(
+    {
+      scanDate: {
+        $eq: date
       }
-    ).populate('scanedBy').populate('product').exec()
-    return allScans
-
+    }
+  ).populate('scanedBy').populate('product').exec()
+  return allScans
 }
 
+async function scansBetwenTwoDates (startDate, endDate) {
+  const allScans = await scan.find(
+    {
+      scanDate: {
+        $gte: startDate, $lte: endDate
+      }
+    }
+  ).populate('scanedBy').populate('product').exec()
+  return allScans
+}
 
 module.exports = {
-  scansBetwen
+  scansBetwenTwoDates,
+  scansByDate
 }
