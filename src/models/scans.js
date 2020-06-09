@@ -21,7 +21,11 @@ const ScansSchema = new mongoose.Schema({
   product: {
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'Product'
-    }
+  },
+  promotion: {
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'Promotion'
+  }
 })
 
 
