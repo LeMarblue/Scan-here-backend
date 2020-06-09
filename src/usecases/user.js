@@ -41,13 +41,13 @@ async function signUp (newuserData) {
 }
 
 async function logIn (email, password) {
-  const user = await user.findOne({ email })
-  if (!user) throw new Error('Invalid data')
+  const userFound = await user.findOne({ email })
+  if (!userFound) throw new Error('Invalid data')
 
   const isPasswordCorrect = await bcrypt.compare(password, user.password)
   if (!isPasswordCorrect) throw new Error('Invalid data')
 
-  return jwt.sign({ id: user._id, roll: user.roll })
+  return jwt.sign({ id: userFound._id, roll: userFound.roll })
 }
 
 module.exports = {
