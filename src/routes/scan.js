@@ -1,48 +1,47 @@
 const express = require('express')
 
-const product = require('../usecases/scans')
+const scans = require('../usecases/scans')
+
+const auth = require('../middleware/auth')
 
 const router = express.Router()
 
+router.use(auth)
 
 router.get('/', async (request, response) => {
-    
-    try {
-        const allscans = await product.getAll()
-        response.json({
-          success: true,
-          message: 'all scans',
-          data: {
-            scans: allscans
-          }
-        })
-    } catch (error) {
-        response.json({
-            success: false,
-            error: error.message,
-          })
-        
-    }
+  try {
+    const allscans = await scans.getAll()
+    response.json({
+      success: true,
+      message: 'all scans',
+      data: {
+        scans: allscans
+      }
+    })
+  } catch (error) {
+    response.json({
+      success: false,
+      error: error.message
+    })
+  }
 })
 
-
-router.post('/' ,async (request, response) => {
-    try {
-      const newScan = await product.create(request.body)
-      response.json({
-        success: true,
-        message: 'Scan registered',
-        data: {
-          scan: newScan
-        }
-      })
-    } catch (error) {
-
-      response.json({
-        success: false,
-        error: error.message,
-      })
-    }
+router.post('/', async (request, response) => {
+  try {
+    const newScan = await scans.create(request.body)
+    response.json({
+      success: true,
+      message: 'Scan registered',
+      data: {
+        scan: newScan
+      }
+    })
+  } catch (error) {
+    response.json({
+      success: false,
+      error: error.message
+    })
+  }
 })
 
 router.delete('/:id', async (request, response) => {
@@ -65,7 +64,7 @@ router.delete('/:id', async (request, response) => {
   }
 })
 
-router.patch('/:id' , async (request, response) => {
+router.patch('/:id', async (request, response) => {
   try {
     const { id } = request.params
     const scanUdated = await scans.updateById(id, request.body)
@@ -84,7 +83,5 @@ router.patch('/:id' , async (request, response) => {
     })
   }
 })
-
-
 
 module.exports = router
