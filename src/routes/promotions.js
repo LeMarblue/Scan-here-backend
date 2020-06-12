@@ -1,7 +1,10 @@
 const express = require('express')
 const promotion = require('../usecases/promotions')
+const auth = require('../middleware/auth')
 
 const router = express.Router()
+
+router.use(auth)
 
 router.get('/', async (request, response) => {
   try {
@@ -59,7 +62,6 @@ router.patch('/:id', async (request, response) => {
   }
 })
 
-
 router.delete('/:id', async (request, response) => {
   try {
     const { id } = request.params
@@ -79,7 +81,5 @@ router.delete('/:id', async (request, response) => {
     })
   }
 })
-
-
 
 module.exports = router
