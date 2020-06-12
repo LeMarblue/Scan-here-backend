@@ -44,7 +44,7 @@ async function logIn (email, password) {
   const userFound = await user.findOne({ email })
   if (!userFound) throw new Error('Invalid data')
 
-  const isPasswordCorrect = await bcrypt.compare(password, user.password)
+  const isPasswordCorrect = await bcrypt.compare(password, userFound.password)
   if (!isPasswordCorrect) throw new Error('Invalid data')
 
   return jwt.sign({ id: userFound._id, roll: userFound.roll })
