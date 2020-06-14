@@ -18,9 +18,18 @@ function updateById (id, scanData) {
   return scan.findByIdAndUpdate(id, scanData)
 }
 
+function getScanByUserAndPromotionId (userId, promotionId) {
+  return scan.find({
+    promotion: promotionId,
+    scanedBy: userId
+  })
+}
+
 module.exports = {
   getAll,
   create,
   deleteById,
-  updateById
+  updateById,
+  getScanByUserAndPromotionId
+
 }
