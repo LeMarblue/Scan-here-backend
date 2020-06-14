@@ -1,4 +1,5 @@
 const express = require('express')
+const atob = require('atob')
 
 const scans = require('../usecases/scans')
 
@@ -28,7 +29,11 @@ router.get('/', async (request, response) => {
 
 router.post('/', async (request, response) => {
   try {
-    const newScan = await scans.create(request.body)
+    const token = request.header('Authorization')
+    const payload = token.split('.')[1]
+    const decodedPayload = atob(payload)
+    const userId = decodedPayload.id
+    const newScan = await scans.create({ ScanedBy: userId, ...request.body })
     response.json({
       success: true,
       message: 'Scan registered',
