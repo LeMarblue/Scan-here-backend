@@ -5,6 +5,11 @@ async function getAll () {
   return allScans
 }
 
+async function getById (id) {
+  const allScans = await promotion.findById(id).populate('productInfo').exec()
+  return allScans
+}
+
 async function create (scanData) {
   const scanDone = await promotion.create(scanData)
   return scanDone
@@ -20,6 +25,7 @@ function updateById (id, scanData) {
 
 module.exports = {
   getAll,
+  getById,
   create,
   deleteById,
   updateById
