@@ -10,6 +10,7 @@ router.get('/', auth, async (request, response) => {
   try {
     const allUsers = await user.getAll()
     response.json({
+      success: true,
       message: 'All users',
       data: {
         user: allUsers
