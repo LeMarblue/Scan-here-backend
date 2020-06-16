@@ -21,13 +21,12 @@ function deletedById (id) {
 }
 
 async function signUp (newuserData) {
-  const { name, email, password, age, city, roll } = newuserData
+  const { name, email, password, age, city } = newuserData
   if (!email) throw new Error('email is required')
   if (!password) throw new Error('password is required')
   if (!name) throw new Error('name is required')
   if (!age) throw new Error('age is required')
   if (!city) throw new Error('city is required')
-  if (!roll) throw new Error('roll is required')
 
   const userAlreadyExists = await user.findOne({ email })
 

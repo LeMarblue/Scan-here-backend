@@ -66,7 +66,7 @@ router.patch('/:id', auth, async (request, response) => {
 router.delete('/:id', auth, async (request, response) => {
   try {
     const { id } = request.params
-    const UserDeleted = await user.deleteById(id)
+    const UserDeleted = await user.deletedById(id)
     response.json({
       success: true,
       message: `User with id ${id} deleted`,
