@@ -20,12 +20,15 @@ const ScansSchema = new mongoose.Schema({
   },
   product: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Product'
+    ref: 'Product',
+    required: true
   },
   promotion: {
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'Promotion'
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Promotion',
+    required: true
   }
+
 })
 
 module.exports = mongoose.model('Scan', ScansSchema)

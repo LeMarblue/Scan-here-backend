@@ -1,13 +1,18 @@
 const product = require('../models/products')
 
 async function getAll () {
-  const allScans = await product.find()
-  return allScans
+  const allProducts = await product.find()
+  return allProducts
+}
+
+async function getBySku (sku) {
+  const productFound = await product.findOne({ sku })
+  return productFound
 }
 
 async function create (scanData) {
-  const scanDone = await product.create(scanData)
-  return scanDone
+  const createdProduct = await product.create(scanData)
+  return createdProduct
 }
 
 function deleteById (id) {
@@ -20,6 +25,7 @@ function updateById (id, scanData) {
 
 module.exports = {
   getAll,
+  getBySku,
   create,
   deleteById,
   updateById

@@ -27,7 +27,7 @@ const userSchema = mongoose.Schema({
   },
   gender: {
     type: String,
-    enum: ['m', 'f', 'n'],
+    enum: ['male', 'female', 'noBinary'],
     required: true
   },
   city: {
@@ -39,10 +39,9 @@ const userSchema = mongoose.Schema({
   },
   roll: {
     type: String,
-    enum: ['user', 'admin', 'comercio'],
-    required: true
+    enum: ['user', 'admin'],
+    default: 'user'
   }
-
 })
 
 module.exports = mongoose.model('user', userSchema)

@@ -2,12 +2,15 @@
 const express = require('express')
 const user = require('../usecases/user')
 
+const auth = require('../middleware/auth')
+
 const router = express.Router()
 
-router.get('/', async (request, response) => {
+router.get('/', auth, async (request, response) => {
   try {
     const allUsers = await user.getAll()
     response.json({
+      success: true,
       message: 'All users',
       data: {
         user: allUsers
@@ -22,7 +25,7 @@ router.get('/', async (request, response) => {
   }
 })
 
-router.post('/', async (request, response) => {
+router.post('/', auth, async (request, response) => {
   try {
     const newUser = await user.create(request.body)
     response.json({
@@ -40,7 +43,7 @@ router.post('/', async (request, response) => {
   }
 })
 
-router.patch('/:id', async (request, response) => {
+router.patch('/:id', auth, async (request, response) => {
   try {
     const { id } = request.params
     const userUpdate = await user.updateById(id, request.body)
@@ -60,10 +63,10 @@ router.patch('/:id', async (request, response) => {
   }
 })
 
-router.delete('/:id', async (request, response) => {
+router.delete('/:id', auth, async (request, response) => {
   try {
     const { id } = request.params
-    const UserDeleted = await user.deleteById(id)
+    const UserDeleted = await user.deletedById(id)
     response.json({
       success: true,
       message: `User with id ${id} deleted`,
