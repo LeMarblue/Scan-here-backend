@@ -81,5 +81,26 @@ router.delete('/:id', async (request, response) => {
 })
 
 
+router.get('/:id', async (request, response) => {
+  try {
+    const { id } = request.params
+    const promotionUpdate = await promotion.getAPromo(id)
+    response.json({
+      success: true,
+      message: `promotion with id ${id}`,
+      data: {
+        promotion: promotionUpdate
+      }
+    })
+  } catch (error) {
+    response.status(400)
+    response.json({
+      success: false,
+      error: error.message
+    })
+  }
+})
+
+
 
 module.exports = router
