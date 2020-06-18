@@ -34,7 +34,7 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  rewards: { // vendria el id de las promociones
+  rewards: {
     type: Object
   },
   roll: {
