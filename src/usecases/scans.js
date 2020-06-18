@@ -1,13 +1,17 @@
 const scan = require('../models/scans')
 
-async function getAll () {
-  const allScans = await scan.find().populate('scanedBy').populate('product').exec()
-  return allScans
+function getAll () {
+  return scan.find().populate('scanedBy').populate('product').exec()
+}
+
+function getByQr (qr) {
+  return scan.findOne({ qr })
 }
 
 async function create (scanData) {
   const scanDone = await scan.create(scanData)
-  return scanDone
+  const fullScanInfo = await scan.findById(scanDone._id).populate('product').populate('promotion')
+  return fullScanInfo
 }
 
 function deleteById (id) {
@@ -27,6 +31,7 @@ function getScanByUserAndPromotionId (userId, promotionId) {
 
 module.exports = {
   getAll,
+  getByQr,
   create,
   deleteById,
   updateById,
