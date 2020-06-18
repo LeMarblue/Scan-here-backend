@@ -17,7 +17,13 @@
     "url": "https://github.com/Mar0903/Scan-here-backen/issues"
   },
   "homepage": "https://github.com/Mar0903/Scan-here-backen#readme",
+  "standard": {
+    "globals": [
+      "atob"
+    ]
+  },
   "dependencies": {
+    "atob": "^2.1.2",
     "bcrypt": "^4.0.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",

@@ -1,6 +1,8 @@
 const express = require('express')
+const atob = require('atob')
 
 const scans = require('../usecases/scans')
+const products = require('../usecases/products')
 
 const auth = require('../middleware/auth')
 
@@ -28,7 +30,30 @@ router.get('/', async (request, response) => {
 
 router.post('/', async (request, response) => {
   try {
-    const newScan = await scans.create(request.body)
+    // get product id
+    const qr = request.body.qr
+    const decryptedData = atob(qr)
+    const scanData = JSON.parse(decryptedData)
+    const product = await products.getBySku(scanData.sku)
+    // Checar si el QR ya ha sido registrado
+    const usedQr = await scans.getByQr(qr)
+    if (usedQr) {
+      throw Error('Codigo QR ya usado')
+    }
+
+    // get user id
+    const token = request.header('Authorization')
+    const payload = token.split('.')[1]
+    const decodedPayload = atob(payload)
+    const userId = decodedPayload.id
+
+    const newScan = await scans.create({
+      ScanedBy: userId,
+      qr,
+      product: product._id,
+      promotion: request.body.promotionId
+    })
+
     response.json({
       success: true,
       message: 'Scan registered',

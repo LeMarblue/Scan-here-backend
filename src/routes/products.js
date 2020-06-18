@@ -10,6 +10,7 @@ router.get('/', async (request, response) => {
   try {
     const allproducts = await product.getAll()
     response.json({
+      success: true,
       message: 'All products',
       data: {
         product: allproducts

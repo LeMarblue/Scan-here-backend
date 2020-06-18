@@ -27,22 +27,21 @@ const userSchema = mongoose.Schema({
   },
   gender: {
     type: String,
-    enum: ['m', 'f', 'n'],
+    enum: ['male', 'female', 'noBinary'],
     required: true
   },
   city: {
     type: String,
     required: true
   },
-  rewards: { // vendria el id de las promociones
+  rewards: {
     type: Object
   },
   roll: {
     type: String,
-    enum: ['user', 'admin', 'comercio'],
-    required: true
+    enum: ['user', 'admin'],
+    default: 'user'
   }
-
 })
 
 module.exports = mongoose.model('user', userSchema)
