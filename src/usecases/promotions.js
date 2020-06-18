@@ -26,6 +26,7 @@ function updateById (id, scanData) {
 module.exports = {
   getAll,
   create,
+  getById: getAPromo,
   deleteById,
   updateById,
   getAPromo
