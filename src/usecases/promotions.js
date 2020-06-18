@@ -5,7 +5,7 @@ async function getAll () {
   return allScans
 }
 
-async function getById (id) {
+async function getAPromo (id) {
   const allScans = await promotion.findById(id).populate('productInfo').exec()
   return allScans
 }
@@ -25,8 +25,8 @@ function updateById (id, scanData) {
 
 module.exports = {
   getAll,
-  getById,
   create,
   deleteById,
-  updateById
+  updateById,
+  getAPromo
 }

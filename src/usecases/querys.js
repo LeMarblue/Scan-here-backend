@@ -3,26 +3,53 @@ const scan = require('../models/scans')
 async function scansByDate (date) {
   const allScans = await scan.find(
     {
-      scanDate: {
-        $eq: date
+      scanDate:  {
+        $gte: date.startOf('day').toDate(),
+        $lte: date.endOf('day').toDate()
       }
     }
   ).populate('scanedBy').populate('product').exec()
   return allScans
 }
 
-async function scansBetwenTwoDates (startDate, endDate) {
-  const allScans = await scan.find(
+async function countScans(){
+  const countedScans = await scan.countDocuments()
+  return countedScans
+}
+
+
+async function countScansByProduct(id,promo_id){
+  const countedScansByProduct = await scan.countDocuments({product : id, promotion : promo_id}).populate('scanedBy').populate('product').exec()
+  return countedScansByProduct
+}
+
+
+async function countScansByUser(id){
+  const countedScansByProduct = await scan.countDocuments({scanedBy : id}).populate('scanedBy').populate('product').exec()
+  return countedScansByProduct
+}
+
+
+async function productScansByDate (date,promo_id,product_id) {
+  const allScans = await scan.countDocuments(
     {
-      scanDate: {
-        $gte: startDate, $lte: endDate
+      promotion : promo_id,
+      product : product_id,
+      scanDate: {        
+        $gte: date.startOf('day').toDate(),
+        $lte: date.endOf('day').toDate()
       }
     }
   ).populate('scanedBy').populate('product').exec()
   return allScans
 }
+
+
 
 module.exports = {
-  scansBetwenTwoDates,
-  scansByDate
+  countScans,
+  countScansByUser,
+  countScansByProduct,
+  scansByDate,
+  productScansByDate
 }
